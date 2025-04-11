@@ -20,7 +20,7 @@ const Pendaftaran = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://reza.rikpetik.site/api/v1/pendaftar", formData);
+      await axios.post("https://reza.rikpetik.site/api/v1/pendaftar/create", formData);
       alert("Pendaftaran berhasil!");
     } catch (error) {
       console.error(error);
