@@ -66,7 +66,7 @@ const Pendaftaran = () => {
     if (!validate()) return;
 
     try {
-      await axios.post("http://127.0.0.1:3000/api/v1/pendaftar/create", formData);
+      await axios.post("https://reza.rikpetik.site/api/v1/pendaftar/create", formData);
       alert("Pendaftaran berhasil!");
     } catch (error) {
       console.error(error);

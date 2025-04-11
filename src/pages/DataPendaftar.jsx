@@ -18,7 +18,7 @@ const DataPendaftar = () => {
 
   const fetchData = () => {
     setLoading(true);
-    fetch("http://127.0.0.1:3000/api/v1/pendaftar")
+    fetch("https://reza.rikpetik.site/api/v1/pendaftar")
       .then((res) => res.json())
       .then((data) => {
         setPendaftar(data.data);
@@ -47,7 +47,7 @@ const DataPendaftar = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`http://127.0.0.1:3000/api/v1/pendaftar/update/${editId}`, {
+      const res = await fetch(`https://reza.rikpetik.site/api/v1/pendaftar/update/${editId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form)
@@ -75,7 +75,7 @@ const DataPendaftar = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Yakin ingin hapus data ini?")) return;
     try {
-      await fetch(`http://127.0.0.1:3000/api/v1/pendaftar/delete/${id}`, {
+      await fetch(`https://reza.rikpetik.site/api/v1/pendaftar/delete/${id}`, {
         method: "DELETE"
       });
       fetchData();
