@@ -21,7 +21,7 @@ const DataPendaftar = () => {
     fetch("https://reza.rikpetik.site/api/v1/pendaftar")
       .then((res) => res.json())
       .then((data) => {
-        setPendaftar(data.data.data);
+        setPendaftar(data.data);
         setLoading(false);
       })
       .catch((err) => {
