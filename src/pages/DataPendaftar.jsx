@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 const DataPendaftar = () => {
   const [pendaftar, setPendaftar] = useState([]);
@@ -16,18 +17,16 @@ const DataPendaftar = () => {
   const [editId, setEditId] = useState(null);
   const [showEditForm, setShowEditForm] = useState(false);
 
-  const fetchData = () => {
+  const fetchData = async () => {
     setLoading(true);
-    fetch("https://reza.rikpetik.site/api/v1/pendaftar")
-      .then((res) => res.json())
-      .then((data) => {
-        setPendaftar(data.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Gagal ambil data:", err);
-        setLoading(false);
-      });
+    try {
+      const res = await axios.get("https://reza.rikpetik.site/api/v1/pendaftar");
+      setPendaftar(res.data.data);
+    } catch (err) {
+      console.error("Gagal ambil data:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -47,13 +46,11 @@ const DataPendaftar = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`https://reza.rikpetik.site/api/v1/pendaftar/update/${editId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form)
-      });
-      const data = await res.json();
-      console.log("Respon update:", data);
+      const res = await axios.put(
+        `https://reza.rikpetik.site/api/v1/pendaftar/update/${editId}`,
+        form
+      );
+      console.log("Respon update:", res.data);
       setForm({
         nm_pendaftar: "",
         alamat: "",
@@ -75,9 +72,7 @@ const DataPendaftar = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Yakin ingin hapus data ini?")) return;
     try {
-      await fetch(`https://reza.rikpetik.site/api/v1/pendaftar/delete/${id}`, {
-        method: "DELETE"
-      });
+      await axios.delete(`https://reza.rikpetik.site/api/v1/pendaftar/delete/${id}`);
       fetchData();
     } catch (err) {
       console.error("Gagal hapus:", err);
