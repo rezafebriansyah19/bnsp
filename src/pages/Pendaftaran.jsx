@@ -22,8 +22,8 @@ const Pendaftaran = () => {
       newErrors.nm_pendaftar = "Nama hanya boleh huruf dan spasi.";
     }
 
-    if (formData.alamat.length < 20) {
-      newErrors.alamat = "Alamat harus minimal 20 karakter.";
+    if (formData.alamat.length < 4) {
+      newErrors.alamat = "Alamat harus minimal 4 karakter.";
     }
 
     if (!["L", "P"].includes(formData.jenis_kelamin)) {
